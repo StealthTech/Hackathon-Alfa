@@ -40,44 +40,40 @@
                 ></a-menu>
             </a-header>
             <a-app-title>
-                <a-heading size="xl">Кредитные карты</a-heading>
+                <a-heading size="xl">Вход в личный кабинет</a-heading>
             </a-app-title>
             <a-app-content>
                 <a-paragraph>
-                    В нашей стране банковские кредитные карты стали выдавать намного позже дебетовых. На Западе
-                    (США и Европа) все было с точностью до наоборот.
+                    Вход в систему необходим, чтобы максимально использовать возможности нашего портала.
                 </a-paragraph>
-
                 <a-paragraph>
-                    Именно поэтому многие россияне до сих пор не
-                    готовы оформить кредитную карту, опасаясь условий банка по возврату заемных средств.
-                </a-paragraph>
+                    <a-form size="m" id="login-form" class="apply-form">
+                        <a-form-field size="m">
+                            <slot name="content">
+                                <a-input id="login-input" width="available" max-length="20" size="m" placeholder="Логин"></a-input>
+                            </slot>
+                        </a-form-field>
 
-                <a-paragraph>
-                    На самом деле,
-                    достаточно внимательно изучить официальную информацию и отзывы клиентов в Интернете,
-                    чтобы сделать осознанный выбор.
-                </a-paragraph>
-
-                <a-paragraph>
-                    <!--Здесь должна быть проверка на логин-->
-                    <a-button id="link-signin-apply-btn" view="extra" size="l">Войти и заполнить анкету</a-button> &nbsp;
-                    <a-button id="link-apply-btn" pseudo="true" size="l">Заполнить анкету</a-button>
+                        <a-form-field size="m">
+                            <slot name="content">
+                                <a-input id="pwd-input" type="password" width="available" max-length="20" size="m" placeholder="Пароль"></a-input>
+                            </slot>
+                        </a-form-field>
+                        <a-button id="login-btn" view="extra" size="l">Войти</a-button>
+                    </a-form>
                 </a-paragraph>
             </a-app-content>
             <a-footer slot="footer"></a-footer>
         </a-page>
         <script type="text/javascript">
-            var logged_in = false;
-            if (logged_in) {
-                    $("#link-signin-apply-btn").hide();
-                    $("#link-apply-btn").prop("view", "extra");
-                    $("#header").on("click", function(){ window.location.href = "index.html"});
-                }
             $(document).ready(function(){
-                $("#link-signin-apply-btn").on("click", function() { window.location.href = "login.html";});
-                $("#link-apply-btn").on("click", function() { window.location.href = "apply.html";});
+                $("#login-btn").on("click", login);
+                $("#header").on("click", function(){ window.location.href = "index.html"});
             });
+
+            var login = function() {
+                window.location.href = "index.html"
+            };
         </script>
     </body>
 </html>

@@ -94,7 +94,7 @@
                     <a-form-field size="m">
                         <a-checkbox id="apply-cb-special" text="У меня нет возможности подтвердить данные через голосовую связь"></a-checkbox>
                         <a-dropdown switcher-text="Что это значит?" mode="hover">
-                            <div slot="popup-content" size="s" style="width: 400px;">
+                            <div slot="popup-content" size="s" style="width: 450px;">
                                 <span>
                                     Данная опция рассчитана на клиентов, у которых возникают затруднения при
                                     личном общении с оператором. В таком случае, им будет предложен альтернативный
@@ -109,15 +109,19 @@
                             <a-heading size="l">Подтверждение личности</a-heading>
                         </a-app-title>
                         <a-form-field size="s">
+                            <slot name="label">
+                                <a-label size="m">На указанный адрес электронной почты будет отправлено письмо с кодом
+                                    подтверждения</a-label>
+                            </slot>
                             <slot name="content">
-                                <a-input id="apply-code" width="available" max-length="20" size="m" placeholder="Код из SMS-сообщения"></a-input>
+                                <a-input id="apply-code" width="available" max-length="20" size="m" placeholder="Код из email-сообщения"></a-input>
                             </slot>
                         </a-form-field>
 
                         <a-form-field size="s">
                             <slot name="content">
-                                <a-button id="apply-code-validate" view="action" size="m">Проверить код</a-button>
-                                <a-button id="apply-code-send" size="m">Отправить SMS с кодом</a-button>
+                                <a-button id="apply-code-validate" view="action" size="m">Проверить код</a-button> &nbsp;
+                                <a-button id="apply-code-send" size="m">Отправить письмо</a-button>
                             </slot>
                         </a-form-field>
                     </div>
