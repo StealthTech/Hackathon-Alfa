@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, minimum-scale=1, maximum-scale=1, initial-scale=1" />
-        <title>Alfa Blueprint</title>
+        <title>Оформление заявки</title>
         <link rel="stylesheet" href="./blueprint/components.css" />
         <script src="./blueprint/components.js"></script>
         <script src="./js/jquery-3.2.0.min.js"></script>
@@ -18,7 +18,7 @@
     </head>
     <body>
         <a-page>
-            <a-header slot="header">
+            <a-header id="header" slot="header">
                 <a-user text="Михаил Фридман" slot="user"></a-user>
                 <a-menu
                     view="horizontal"
@@ -40,11 +40,13 @@
                 ></a-menu>
             </a-header>
             <a-app-title>
-                <a-heading size="xl">Оформление заявки</a-heading>
+                <a-heading id="page-heading" size="xl">Оформление заявки</a-heading>
             </a-app-title>
             <a-app-content>
                 <a-paragraph>
-                    Альфа-банк — крупнейший российский частный коммерческий банк. По данным рейтингов РБК и Forbes на конец 2010 года — седьмой в России банк по объёму активов. Главный офис расположен в Москве.
+                    В нашем банке Вы можете оформить кредитную карту по одной из представленных Вашему вниманию
+                    кредитных программ. Для того, чтобы оставить свою заявку на получение субсидии, необходимо
+                    заполнить анкету ниже.
                 </a-paragraph>
                 <a-form size="m" id="apply-form" class="apply-form">
                     <a-form-field size="m">
@@ -71,7 +73,7 @@
                         </slot>
                         <slot name="content">
                             <a-radio-group type="line">
-                                <a-radio text="Мужской"></a-radio>
+                                <a-radio text="Мужской" checked="true"></a-radio>
                                 <a-radio text="Женский"></a-radio>
                             </a-radio-group>
                         </slot>
@@ -90,49 +92,76 @@
                     </a-form-field>
 
                     <a-form-field size="m">
-                        <a-checkbox text="У меня имеются нарушения речи или слуха"></a-checkbox>
+                        <a-checkbox id="apply-cb-special" text="У меня нет возможности подтвердить данные через голосовую связь"></a-checkbox>
                         <a-dropdown switcher-text="Что это значит?" mode="hover">
-                            <div slot="popup-content" size="s">
+                            <div slot="popup-content" size="s" style="width: 400px;">
                                 <span>
                                     Данная опция рассчитана на клиентов, у которых возникают затруднения при
                                     личном общении с оператором. В таком случае, им будет предложен альтернативный
-                                    варианта подтверждения операции.
+                                    вариант подтверждения операции.
                                 </span>
                             </div>
                         </a-dropdown>
                     </a-form-field>
 
+                    <div id="apply-cont-special-validate" style="display: none;">
+                        <a-app-title>
+                            <a-heading size="l">Подтверждение личности</a-heading>
+                        </a-app-title>
+                        <a-form-field size="s">
+                            <slot name="content">
+                                <a-input id="apply-code" width="available" max-length="20" size="m" placeholder="Код из SMS-сообщения"></a-input>
+                            </slot>
+                        </a-form-field>
+
+                        <a-form-field size="s">
+                            <slot name="content">
+                                <a-button id="apply-code-validate" view="action" size="m">Проверить код</a-button>
+                                <a-button id="apply-code-send" size="m">Отправить SMS с кодом</a-button>
+                            </slot>
+                        </a-form-field>
+                    </div>
+
                     <a-form-field>
-                        <a href="apply_ok_basic.html"><a-button view="extra" size="l"> <!--type="submit"-->Подать заявку</a-button></a>
-                        <a href="apply_ok_special.html"><a-button size="l"> <!--type="submit"-->Подать заявку (чекбокс)</a-button></a>
+                        <a-button id="apply-btn-submit" view="extra" size="l" type="submit">Подать заявку</a-button>
                     </a-form-field>
                 </a-form>
-
-                <!--Требует обсуждения, будет выдвигаться с помощью jquery при включенном checkbox-->
-                <div id="apply-cont-special-validate">
-                    <a-app-title>
-                        <a-heading size="l">Подтверждение личности</a-heading>
-                    </a-app-title>
-                    <a-form size="m" id="apply-form-special-validate" class="apply-form-special-validate">
-                        <a-form-field size="s">
-                            <slot name="content">
-                                <a-input  width="available" max-length="20" size="m" placeholder="Код из SMS-сообщения"></a-input>
-                            </slot>
-                        </a-form-field>
-
-                        <a-form-field size="s">
-                            <slot name="content">
-                                <a-button view="action" size="m">Отправить SMS с кодом</a-button>
-                            </slot>
-                        </a-form-field>
-                    </a-form>
-                </div>
-
-                <a href="index.html">
-                      <a-button size="l">Вернуться на главную страницу</a-button>
-                </a>
             </a-app-content>
             <a-footer slot="footer"></a-footer>
         </a-page>
+        <script type="text/javascript">
+            $(document).ready(function(){
+                $("#apply-cb-special").on("change", toggle_special);
+                $("#apply-btn-submit").on("click", apply_ok);
+                $("#apply-code-validate").on("click", validate_code);
+                $("#apply-code-send").on("click", send_code);
+                $("#header").on("click", function(){ window.location.href = "index.html"});
+            });
+            var checkedSpecial = false;
+            var toggle_special = function(){
+                checkedSpecial = !checkedSpecial;
+                $("#apply-cont-special-validate").fadeToggle(500);
+                $('html, body').animate({
+                    scrollTop: $("#page-heading").offset().top
+                }, 500);
+            };
+
+            var apply_ok = function(){
+                if (checkedSpecial) {
+                    window.location.href = "apply_ok_special.html"
+                } else {
+                    window.location.href = "apply_ok_basic.html"
+                }
+            };
+
+            var validate_code = function(){
+                // Валидация кода для регистрации
+                $("#apply-code").val();
+            };
+
+            var send_code = function(){
+                // Отправка кода для регистрации
+            };
+        </script>
     </body>
 </html>
