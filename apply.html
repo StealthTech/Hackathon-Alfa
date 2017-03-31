@@ -6,6 +6,7 @@
         <title>Alfa Blueprint</title>
         <link rel="stylesheet" href="./blueprint/components.css" />
         <script src="./blueprint/components.js"></script>
+        <script src="./js/jquery-3.2.0.min.js"></script>
         <!--
         <link rel="stylesheet" href="./blueprint/corporate-components.css" />
         <script src="./blueprint/corporate-components.js"></script>
@@ -45,66 +46,91 @@
                 <a-paragraph>
                     Альфа-банк — крупнейший российский частный коммерческий банк. По данным рейтингов РБК и Forbes на конец 2010 года — седьмой в России банк по объёму активов. Главный офис расположен в Москве.
                 </a-paragraph>
-                <a-form size="m" id="example-form" class="example-form">
-                        <a-form-field size="m">
-                            <slot name="content">
-                                <a-input  width="available" max-length="20" size="m" placeholder="Фамилия"></a-input>
-                            </slot>
-                        </a-form-field>
+                <a-form size="m" id="apply-form" class="apply-form">
+                    <a-form-field size="m">
+                        <slot name="content">
+                            <a-input  width="available" max-length="20" size="m" placeholder="Фамилия"></a-input>
+                        </slot>
+                    </a-form-field>
 
-                        <a-form-field size="m">
-                            <slot name="content">
-                                <a-input  width="available" max-length="20" size="m" placeholder="Имя"></a-input>
-                            </slot>
-                        </a-form-field>
+                    <a-form-field size="m">
+                        <slot name="content">
+                            <a-input  width="available" max-length="20" size="m" placeholder="Имя"></a-input>
+                        </slot>
+                    </a-form-field>
 
-                        <a-form-field size="m">
-                            <slot name="content">
-                                <a-input  width="available" max-length="20" size="m" placeholder="Отчество"></a-input>
-                            </slot>
-                        </a-form-field>
+                    <a-form-field size="m">
+                        <slot name="content">
+                            <a-input  width="available" max-length="20" size="m" placeholder="Отчество"></a-input>
+                        </slot>
+                    </a-form-field>
 
-                        <a-form-field size="m">
-                            <slot name="label">
-                                <a-label size="m">Пол</a-label>
-                            </slot>
-                            <slot name="content">
-                                <a-radio-group type="line">
-                                    <a-radio text="Мужской"></a-radio>
-                                    <a-radio text="Женский"></a-radio>
-                                </a-radio-group>
-                            </slot>
-                        </a-form-field>
+                    <a-form-field size="m">
+                        <slot name="label">
+                            <a-label size="m">Пол</a-label>
+                        </slot>
+                        <slot name="content">
+                            <a-radio-group type="line">
+                                <a-radio text="Мужской"></a-radio>
+                                <a-radio text="Женский"></a-radio>
+                            </a-radio-group>
+                        </slot>
+                    </a-form-field>
 
-                        <a-form-field size="m">
-                            <slot name="content">
-                                <a-phone-input width="available" size="m" placeholder="Мобильный телефон"></a-phone-input>
-                            </slot>
-                        </a-form-field>
+                    <a-form-field size="m">
+                        <slot name="content">
+                            <a-phone-input width="available" size="m" placeholder="Мобильный телефон"></a-phone-input>
+                        </slot>
+                    </a-form-field>
 
-                        <a-form-field size="m">
-                            <slot name="content">
-                                <a-email-input width="available" size="m" placeholder="Электронная почта"></a-email-input>
-                            </slot>
-                        </a-form-field>
+                    <a-form-field size="m">
+                        <slot name="content">
+                            <a-email-input width="available" size="m" placeholder="Электронная почта"></a-email-input>
+                        </slot>
+                    </a-form-field>
 
-                        <a-form-field size="m">
-                            <a-checkbox text="У меня имеются нарушения речи или слуха"></a-checkbox>
-                            <a-dropdown switcher-text="Что это значит?" mode="hover">
-                                <div slot="popup-content" size="s">
-                                    <span>
-                                        Данная опция рассчитана на клиентов, у которых возникают затруднения при
-                                        личном общении с оператором. В таком случае, им будет предложен альтернативный
-                                        варианта подтверждения операции.
-                                    </span>
-                                </div>
-                            </a-dropdown>
-                        </a-form-field>
+                    <a-form-field size="m">
+                        <a-checkbox text="У меня имеются нарушения речи или слуха"></a-checkbox>
+                        <a-dropdown switcher-text="Что это значит?" mode="hover">
+                            <div slot="popup-content" size="s">
+                                <span>
+                                    Данная опция рассчитана на клиентов, у которых возникают затруднения при
+                                    личном общении с оператором. В таком случае, им будет предложен альтернативный
+                                    варианта подтверждения операции.
+                                </span>
+                            </div>
+                        </a-dropdown>
+                    </a-form-field>
 
-                        <a-form-field>
-                            <a href="apply_ok_basic.html"><a-button view="extra" size="l"> <!--type="submit"-->Подать заявку</a-button></a>
-                        </a-form-field>
+                    <a-form-field>
+                        <a href="apply_ok_basic.html"><a-button view="extra" size="l"> <!--type="submit"-->Подать заявку</a-button></a>
+                        <a href="apply_ok_special.html"><a-button size="l"> <!--type="submit"-->Подать заявку (чекбокс)</a-button></a>
+                    </a-form-field>
                 </a-form>
+
+                <!--Требует обсуждения, будет выдвигаться с помощью jquery при включенном checkbox-->
+                <div id="apply-cont-special-validate">
+                    <a-app-title>
+                        <a-heading size="l">Подтверждение личности</a-heading>
+                    </a-app-title>
+                    <a-form size="m" id="apply-form-special-validate" class="apply-form-special-validate">
+                        <a-form-field size="s">
+                            <slot name="content">
+                                <a-input  width="available" max-length="20" size="m" placeholder="Код из SMS-сообщения"></a-input>
+                            </slot>
+                        </a-form-field>
+
+                        <a-form-field size="s">
+                            <slot name="content">
+                                <a-button view="action" size="m">Отправить SMS с кодом</a-button>
+                            </slot>
+                        </a-form-field>
+                    </a-form>
+                </div>
+
+                <a href="index.html">
+                      <a-button size="l">Вернуться на главную страницу</a-button>
+                </a>
             </a-app-content>
             <a-footer slot="footer"></a-footer>
         </a-page>

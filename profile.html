@@ -18,7 +18,7 @@
     <body>
         <a-page>
             <a-header slot="header">
-                <a-user text="Михаил Фридман" slot="user"></a-user>
+                <a-user url="profile.html" text="Михаил Фридман" slot="user"></a-user>
                 <a-menu
                     view="horizontal"
                     content="[
@@ -39,36 +39,20 @@
                 ></a-menu>
             </a-header>
             <a-app-title>
-                <a-heading size="xl">Ещё немного...</a-heading>
-                <a-heading size="l">Подтверждение личности</a-heading>
+                <a-heading size="xl">Личный кабинет</a-heading>
             </a-app-title>
             <a-app-content>
                 <a-paragraph>
-                    Для оформления заявки, введите код, полученный в SMS-сообщении.
+                    Список
                 </a-paragraph>
-
-                <a-form size="m" id="apply-form" class="apply-form">
-                    <a-form-field size="s">
-                        <slot name="content">
-                            <a-input  width="available" max-length="20" size="m" placeholder="Код из SMS-сообщения"></a-input>
-                        </slot>
-                    </a-form-field>
-
-                    <a-form-field size="s">
-                        <slot name="content">
-                            <a-button view="action" size="m">Отправить SMS с кодом</a-button>
-                        </slot>
-                    </a-form-field>
-                </a-form>
-
+                
                 <a-paragraph>
-                    В ближайшее рабочее время специалист рассмотрит Вашу заявку и, в случае подтверждения,
-                    свяжется с Вами для уточнения дальнейшей информации.
+                    <div>
+                        <a href="apply.html">
+                            <a-button size="l">Вернуться на главную страницу</a-button>
+                        </a>
+                    </div>
                 </a-paragraph>
-
-                <a href="index.html">
-                      <a-button size="l">Вернуться на главную страницу</a-button>
-                </a>
             </a-app-content>
             <a-footer slot="footer"></a-footer>
         </a-page>
