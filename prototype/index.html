@@ -1,27 +1,55 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, minimum-scale=1, maximum-scale=1, initial-scale=1" />
-        <title>Alfa Blueprint</title>
-        <link rel="stylesheet" href="./blueprint/components.css" />
-        <script src="./blueprint/components.js"></script>
-        <!--
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, minimum-scale=1, maximum-scale=1, initial-scale=1" />
+    <title>Alfa Blueprint</title>
+    <link rel="stylesheet" href="./blueprint/components.css" />
+    <script src="./blueprint/components.js"></script>
+    <script src="jquery.js"></script>
+
+    <style>
+        .example-form .form {
+            max-width: 400px;
+        }
+    </style>
+    <script>
+        $(document).ready(function () {
+            $("#first").click(function () {
+                $('a-app-content').hide();
+                $("#regs_block").show();
+
+            });
+
+
+            /* $("#second").click(function () {
+                 $("#regs_block").hide();
+             });*/
+
+            $("#second").click(function () {
+                $('a-app-content').hide();
+                $("#vac_block").show();
+            })
+        });
+    </script>
+
+
+    <!--
         <link rel="stylesheet" href="./blueprint/corporate-components.css" />
         <script src="./blueprint/corporate-components.js"></script>
         -->
-        <!--
+    <!--
         <link rel="stylesheet" href="./blueprint/retail-components.css" />
         <script src="./blueprint/retail-components.js"></script>
         -->
-    </head>
-    <body>
-        <a-page>
-            <a-header slot="header">
-                <a-user text="Михаил Фридман" slot="user"></a-user>
-                <a-menu
-                    view="horizontal"
-                    content="[
+</head>
+
+<body>
+    <a-page>
+        <a-header slot="header">
+            <a-user text="Михаил Фридман" slot="user"></a-user>
+            <a-menu view="horizontal" content="[
                         {
                             content: 'Экран 1',
                             value: 'screen1'
@@ -34,19 +62,147 @@
                             content: 'Экран 3',
                             value: 'screen3'
                         }
-                    ]"
-                    slot="menu"
-                ></a-menu>
-            </a-header>
+                    ]" slot="menu">
+            </a-menu>
+        </a-header>
+        <a-app-title>
+            <a-heading size="xl">Заголовок страницы</a-heading>
+        </a-app-title>
+        <a-app-content>
+            <a-paragraph>
+                Альфа-банк — крупнейший российский частный коммерческий банк. По данным рейтингов РБК и Forbes на конец 2010 года — седьмой в России банк по объёму активов. Главный офис расположен в Москве.
+            </a-paragraph>
+        </a-app-content>
+        <div class="app__menu">
+            <div class="app__menu-case">
+                <div class="app__menu-content">
+                    <regap-children>
+                        <div class="menu menu_size_m menu_view_horizontal menu_mode_basic menu_theme_alfa-on-color" tabindex="0">
+                            <div class="menu-item menu-item_type_link menu-item_theme_alfa-on-color">
+                                <a href="#" id="first" class="link link_size_m link_theme_alfa-on-color menu-item__control menu-item__link" tabindex="0">
+                                    <span class="link__text">Раздел 1</span>
+                                </a>
+                            </div>
+                            <div class="menu-item menu-item_type_link menu-item_theme_alfa-on-color">
+                                <a href="#" id="second" class="link link_size_m link_theme_alfa-on-color menu-item__control menu-item__link" tabindex="0">
+                                    <span class="link__text">Раздел 2</span>
+                                </a>
+                            </div>
+                        </div>
+                    </regap-children>
+                </div>
+            </div>
+        </div>
+
+        <a-app-content id="regs_block" style="display: none;">
             <a-app-title>
-                <a-heading size="xl">Заголовок страницы</a-heading>
-            </a-app-title>
-            <a-app-content>
+                <a-heading size="l">Регистрация компании в системе</a-heading>
                 <a-paragraph>
                     Альфа-банк — крупнейший российский частный коммерческий банк. По данным рейтингов РБК и Forbes на конец 2010 года — седьмой в России банк по объёму активов. Главный офис расположен в Москве.
                 </a-paragraph>
-            </a-app-content>
-            <a-footer slot="footer"></a-footer>
-        </a-page>
-    </body>
+            </a-app-title>
+
+            <a-form size="m" class="example-form">
+                <a-form-field size="m">
+                    <slot name="label">
+                        <a-label size="m">Название организации:</a-label>
+                    </slot>
+                    <slot name="content">
+                        <a-input width="available" max-length="20" size="m"></a-input>
+                    </slot>
+                </a-form-field>
+
+                <a-form-field size="m">
+                    <slot name="label">
+                        <a-label size="m">Телефон:</a-label>
+                    </slot>
+                    <slot name="content">
+                        <a-phone-input placeholder="+7 000 000 00 00" size="l"></a-phone-input>
+                    </slot>
+                </a-form-field>
+
+                <a-form-field size="m">
+                    <slot name="label">
+                        <a-label size="m">Почта:</a-label>
+                    </slot>
+                    <slot name="content">
+                        <a-email-input placeholder="Электронная почта" size="l"></a-email-input>
+                    </slot>
+                </a-form-field>
+
+                <a-form-field size="m">
+                    <slot name="label">
+                        <a-label size="m">Краткое описание компании:</a-label>
+                    </slot>
+                    <slot name="content">
+                        <div>
+                            <a-textarea placeholder="Привет! Я форма для ввода вооо-ооо-оот такого текста!"></a-textarea>
+                        </div>
+                    </slot>
+                </a-form-field>
+            </a-form>
+        </a-app-content>
+
+
+
+
+        <a-app-content id='vac_block' style="display: none;">
+            <a-app-title>
+                <a-heading size="l">Создание вакансий</a-heading>
+                <a-paragraph>
+                    Альфа-банк — крупнейший российский частный коммерческий банк. По данным рейтингов РБК и Forbes на конец 2010 года — седьмой в России банк по объёму активов. Главный офис расположен в Москве.
+                </a-paragraph>
+            </a-app-title>
+
+            <a-form size="m" class="example-form">
+                <a-form-field size="m">
+                    <slot name="label">
+                        <a-label size="m">Название организации:</a-label>
+                    </slot>
+                    <slot name="content">
+                        <a-input width="available" max-length="20" size="m"></a-input>
+                    </slot>
+                </a-form-field>
+
+                <a-form-field size="m">
+                    <slot name="label">
+                        <a-label size="m">Телефон:</a-label>
+                    </slot>
+                    <slot name="content">
+                        <a-phone-input placeholder="+7 000 000 00 00" size="l"></a-phone-input>
+                    </slot>
+                </a-form-field>
+
+                <a-form-field size="m">
+                    <slot name="label">
+                        <a-label size="m">Почта:</a-label>
+                    </slot>
+                    <slot name="content">
+                        <a-email-input placeholder="Электронная почта" size="l"></a-email-input>
+                    </slot>
+                </a-form-field>
+
+                <a-form-field size="m">
+                    <slot name="label">
+                        <a-label size="m">Краткое описание компании:</a-label>
+                    </slot>
+                    <slot name="content">
+                        <div>
+                            <a-textarea placeholder="Привет! Я форма для ввода вооо-ооо-оот такого текста!"></a-textarea>
+                        </div>
+                    </slot>
+                </a-form-field>
+            </a-form>
+        </a-app-content>
+
+
+
+
+        <a-footer slot="footer "></a-footer>
+    </a-page>
+
+</body>
+<script>
+</script>
+
 </html>
