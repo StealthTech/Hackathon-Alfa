@@ -14,23 +14,65 @@
             max-width: 400px;
         }
     </style>
-    <script>
+    <script type="text/javascript">
         $(document).ready(function () {
-            $("#first").click(function () {
-                $('a-app-content').hide();
-                $("#regs_block").show();
+            $("#reg-company").click(function(){
+                var name = $("#name_comp").val();    
+                var jurname = $("#name_juridic_comp").val();    
+                var adress = $("#adress_comp").val();    
+                var email = $("#email_comp").val();
+                var status = "addcompany";
+                $.ajax({
+                    type: "POST",
+                    url: "recruit/api",
+                    data: "title="+name+"&fulltitle="+jurname+"&email="+email+"&address="+adress+"&action="+status,
+                    success: function(msg){
+                       
+                      }
+                });
+            });
+            
+            $("#your_meet1").children().click(function () {
+                $('.popup__content').show();
+            });
 
+            $("#comp_prof").click(function () {
+                $('a-app-content').hide();
+                $('.popup__content').hide();
+                $("#comp_prof_block").show();
+            });
+            $("#reg_comp").click(function () {
+                $('a-app-content').hide();
+                $('.popup__content').hide();
+                $("#reg_comp_block").show();
+            });
+            $("#edit_comp").click(function () {
+                $('a-app-content').hide();
+                $('.popup__content').hide();
+                $("#edit_comp_block").show();
             });
 
 
-            /* $("#second").click(function () {
-                 $("#regs_block").hide();
-             });*/
+            $("#your_meet").children().click(function () {
+                $('.popup__content').show();
+            });
 
-            $("#second").click(function () {
+            $("#create_meet").click(function () {
                 $('a-app-content').hide();
-                $("#vac_block").show();
-            })
+                $('.popup__content').hide();
+                $("#meet_block").show();
+            });
+            $("#edit_meet").click(function () {
+                $('a-app-content').hide();
+                $('.popup__content').hide();
+                $("#edit_block").show();
+            });
+            $("#list_meet").click(function () {
+                $('a-app-content').hide();
+                $('.popup__content').hide();
+                $("#list_block").show();
+            });
+
         });
     </script>
 
@@ -66,85 +108,136 @@
             </a-menu>
         </a-header>
         <a-app-title>
-            <a-heading size="xl">Заголовок страницы</a-heading>
+            <a-heading size="xl">Рекрутинг - это просто!</a-heading>
         </a-app-title>
         <a-app-content>
             <a-paragraph>
-                Альфа-банк — крупнейший российский частный коммерческий банк. По данным рейтингов РБК и Forbes на конец 2010 года — седьмой в России банк по объёму активов. Главный офис расположен в Москве.
+                Ещё никогда поиск новых сотрудников не был таким приятным процессом! Альфа-банк предоставляет любому зарегистрированному предпринимателю возможность размещать вакансии в один клик, и так же легко просматривать откликнувшихся соискателей. В нашем сервисе Вы также сможете назначить собеседование, лишь указав желаемую дату - остальную работу выполнит система. Попробуйте сами!
             </a-paragraph>
         </a-app-content>
         <div class="app__menu">
-            <div class="app__menu-case">
-                <div class="app__menu-content">
+            <div class="app__menu-case container-row">
+                <div class="app__menu-content ">
                     <regap-children>
-                        <div class="menu menu_size_m menu_view_horizontal menu_mode_basic menu_theme_alfa-on-color" tabindex="0">
-                            <div class="menu-item menu-item_type_link menu-item_theme_alfa-on-color">
-                                <a href="#" id="first" class="link link_size_m link_theme_alfa-on-color menu-item__control menu-item__link" tabindex="0">
-                                    <span class="link__text">Раздел 1</span>
-                                </a>
-                            </div>
-                            <div class="menu-item menu-item_type_link menu-item_theme_alfa-on-color">
-                                <a href="#" id="second" class="link link_size_m link_theme_alfa-on-color menu-item__control menu-item__link" tabindex="0">
-                                    <span class="link__text">Раздел 2</span>
-                                </a>
+                        <div class="menu menu_size_m menu_view_horizontal menu_mode_basic menu_theme_alfa-on-color" tabindex="0" style="float:left;">
+                            <div id="your_meet1">
+                                <a-dropdown switcher-type="button" switcher-text="Ваша компания">
+                                    <div style="width: 200px; position: relative;" slot="popup-content">
+                                        <a id='comp_prof' href="#" style="color:white;">Профайл компании</a>
+                                    </div>
+                                    <div style="width: 200px; position: relative;" slot="popup-content">
+                                        <a id="reg_comp" href="#" style="color:white;">Регистрация компании</a>
+                                    </div>
+                                    <div style="width: 200px;  position: relative;" slot="popup-content">
+                                        <a id="edit_comp" href="#" style="color:white;">Редактирование</a>
+                                    </div>
+                                </a-dropdown>
                             </div>
                         </div>
+                        <div class="menu menu_size_m menu_view_horizontal menu_mode_basic menu_theme_alfa-on-color" tabindex="0" style="float:left; margin-left:10px;">
+                            <div id="your_meet2">
+                                <a-dropdown switcher-type="button" switcher-text="Ваши вакансии">
+                                    <div style="width: 200px; position: relative;" slot="popup-content">
+                                        <a href="#" style="color:white;">Профайл компании</a>
+                                    </div>
+                                    <div style="width: 200px; position: relative;" slot="popup-content">
+                                        <a href="#" style="color:white;">Регистрация компании</a>
+                                    </div>
+                                    <div style="width: 200px;  position: relative;" slot="popup-content">
+                                        <a href="#" style="color:white;">Редактирование</a>
+                                    </div>
+                                </a-dropdown>
+                            </div>
+                        </div>
+                        <div class="menu menu_size_m menu_view_horizontal menu_mode_basic menu_theme_alfa-on-color" tabindex="0" style="float:left; margin-left:10px;">
+                            <div id="your_meet">
+                                <a-dropdown switcher-type="button" switcher-text="Ваши собеседования">
+                                    <div style="width: 200px; position: relative;" slot="popup-content">
+                                        <span style="color:white;cursor:pointer;" id="create_meet">Создание собеседования</span>
+                                    </div>
+                                    <div style="width: 200px; position: relative;" slot="popup-content">
+                                        <span style="color:white;cursor:pointer;" id="edit_meet">Редактирование собеседования</span>
+                                    </div>
+                                    <div style="width: 200px;  position: relative;" slot="popup-content">
+                                        <span style="color:white;cursor:pointer;" id="list_meet">Список резюме</span>
+                                    </div>
+                                </a-dropdown>
+                            </div>
+                        </div>
+                        <div style="clear:both;"></div>
                     </regap-children>
                 </div>
             </div>
         </div>
 
-        <a-app-content id="regs_block" style="display: none;">
+
+
+
+        <a-app-content id="comp_prof_block" style="display: none;">
             <a-app-title>
-                <a-heading size="l">Регистрация компании в системе</a-heading>
-                <a-paragraph>
-                    Альфа-банк — крупнейший российский частный коммерческий банк. По данным рейтингов РБК и Forbes на конец 2010 года — седьмой в России банк по объёму активов. Главный офис расположен в Москве.
-                </a-paragraph>
+                <a-heading size="l">Профайл компаний</a-heading>
             </a-app-title>
 
+            <a-paragraph>
+                Выберите компанию
+            </a-paragraph>
+            <div>
+                <a-select mode="radio" size="m" options="[
+        { value: 'Vkontakte', text: 'Vkontakte' },
+        { value: 'Facebook', text: 'Facebook' },
+        { value: 'Twitter', text: 'Twitter' }
+    ]"></a-select>
+            </div>
             <a-form size="m" class="example-form">
-                <a-form-field size="m">
-                    <slot name="label">
-                        <a-label size="m">Название организации:</a-label>
-                    </slot>
-                    <slot name="content">
-                        <a-input width="available" max-length="20" size="m"></a-input>
-                    </slot>
-                </a-form-field>
-
-                <a-form-field size="m">
-                    <slot name="label">
-                        <a-label size="m">Телефон:</a-label>
-                    </slot>
-                    <slot name="content">
-                        <a-phone-input placeholder="+7 000 000 00 00" size="l"></a-phone-input>
-                    </slot>
-                </a-form-field>
-
-                <a-form-field size="m">
-                    <slot name="label">
-                        <a-label size="m">Почта:</a-label>
-                    </slot>
-                    <slot name="content">
-                        <a-email-input placeholder="Электронная почта" size="l"></a-email-input>
-                    </slot>
-                </a-form-field>
-
-                <a-form-field size="m">
-                    <slot name="label">
-                        <a-label size="m">Краткое описание компании:</a-label>
-                    </slot>
-                    <slot name="content">
-                        <div>
-                            <a-textarea placeholder="Привет! Я форма для ввода вооо-ооо-оот такого текста!"></a-textarea>
-                        </div>
-                    </slot>
-                </a-form-field>
+                <div>
+                    <a-button size="m">Подтвердить</a-button>
+                </div>
             </a-form>
         </a-app-content>
 
 
-
+        <a-app-content id="reg_comp_block" style="display: none;">
+            <a-app-title>
+                <a-heading size="l">Регистрация компании</a-heading>
+            </a-app-title>
+            <a-form-field size="m">
+                <slot name="label">
+                    <a-label size="m">Название организации:</a-label>
+                </slot>
+                <slot name="content">
+                    <a-input width="available" max-length="20" size="m" id="name_comp"></a-input>
+                </slot>
+            </a-form-field>
+            <a-form-field size="m">
+                <slot name="label">
+                    <a-label size="m">Юридическое название организации:</a-label>
+                </slot>
+                <slot name="content">
+                    <a-input width="available" max-length="20" size="m" id="name_juridic_comp"></a-input>
+                </slot>
+            </a-form-field>
+            <a-form-field size="m">
+                <slot name="label">
+                    <a-label size="m">Адрес:</a-label>
+                </slot>
+                <slot name="content">
+                    <a-input width="available" max-length="20" size="m" id="adress_comp"></a-input>
+                </slot>
+            </a-form-field>
+            <a-form-field size="m">
+                <slot name="label">
+                    <a-label size="m">Email:</a-label>
+                </slot>
+                <slot name="content">
+                    <a-input width="available" max-length="20" size="m" id="email_comp"></a-input>
+                </slot>
+            </a-form-field>
+            <a-form size="m" class="example-form">
+                <div>
+                    <a-button size="m" id="reg-company">Зарегистрировать</a-button>
+                </div>
+            </a-form>
+        </a-app-content>
 
         <a-app-content id='vac_block' style="display: none;">
             <a-app-title>
@@ -196,7 +289,174 @@
         </a-app-content>
 
 
+        <a-app-content id='res_block' style="display: none;">
+            <a-app-title>
+                <a-heading size="l">Списки резюме</a-heading>
+                <a-paragraph>
+                    Альфа-банк — крупнейший российский частный коммерческий банк. По данным рейтингов РБК и Forbes на конец 2010 года — седьмой в России банк по объёму активов. Главный офис расположен в Москве.
+                </a-paragraph>
+            </a-app-title>
 
+            <a-form size="m" class="example-form">
+                <a-form-field size="m">
+                    <slot name="label">
+                        <a-label size="m">Название организации:</a-label>
+                    </slot>
+                    <slot name="content">
+                        <a-input width="available" max-length="20" size="m"></a-input>
+                    </slot>
+                </a-form-field>
+
+                <a-form-field size="m">
+                    <slot name="label">
+                        <a-label size="m">Телефон:</a-label>
+                    </slot>
+                    <slot name="content">
+                        <a-phone-input placeholder="+7 000 000 00 00" size="l"></a-phone-input>
+                    </slot>
+                </a-form-field>
+
+                <a-form-field size="m">
+                    <slot name="label">
+                        <a-label size="m">Почта:</a-label>
+                    </slot>
+                    <slot name="content">
+                        <a-email-input placeholder="Электронная почта" size="l"></a-email-input>
+                    </slot>
+                </a-form-field>
+
+                <a-form-field size="m">
+                    <slot name="label">
+                        <a-label size="m">Краткое описание компании:</a-label>
+                    </slot>
+                    <slot name="content">
+                        <div>
+                            <a-textarea placeholder="Привет! Я форма для ввода вооо-ооо-оот такого текста!"></a-textarea>
+                        </div>
+                    </slot>
+                </a-form-field>
+            </a-form>
+        </a-app-content>
+
+
+        <a-app-content id='edit_block' style="display: none;">
+            <a-app-title>
+                <a-heading size="l">Редактирование собеседования</a-heading>
+            </a-app-title>
+
+            <a-form size="m" class="example-form">
+                <a-form-field size="m">
+                    <slot name="label">
+                        <a-label size="m">Название организации:</a-label>
+                    </slot>
+                    <slot name="content">
+                        <a-input width="available" max-length="20" size="m"></a-input>
+                    </slot>
+                </a-form-field>
+
+                <a-form-field size="m">
+                    <slot name="label">
+                        <a-label size="m">Телефон:</a-label>
+                    </slot>
+                    <slot name="content">
+                        <a-phone-input placeholder="+7 000 000 00 00" size="l"></a-phone-input>
+                    </slot>
+                </a-form-field>
+
+                <a-form-field size="m">
+                    <slot name="label">
+                        <a-label size="m">Почта:</a-label>
+                    </slot>
+                    <slot name="content">
+                        <a-email-input placeholder="Электронная почта" size="l"></a-email-input>
+                    </slot>
+                </a-form-field>
+
+                <a-form-field size="m">
+                    <slot name="label">
+                        <a-label size="m">Краткое описание компании:</a-label>
+                    </slot>
+                    <slot name="content">
+                        <div>
+                            <a-textarea placeholder="Привет! Я форма для ввода вооо-ооо-оот такого текста!"></a-textarea>
+                        </div>
+                    </slot>
+                </a-form-field>
+            </a-form>
+        </a-app-content>
+
+
+        <a-app-content id='edit_comp_block' style="display: none;">
+            <a-app-title>
+                <a-heading size="l">Редактирование компаний</a-heading>
+            </a-app-title>
+
+            <a-form size="m" class="example-form">
+                <div style="margin-bottom:10px;">
+                    <a-select mode="radio" size="m" options="[
+                        { value: 'Vkontakte', text: 'Vkontakte' },
+                        { value: 'Facebook', text: 'Facebook' },
+                        { value: 'Twitter', text: 'Twitter' }
+                        ]">
+                    </a-select>
+                </div>  
+                
+                <slot name="content">
+                    <a-button size="m" id="reg-company">Редактирование</a-button>
+                </slot>
+            </a-form>
+        </a-app-content>
+
+
+
+        <a-app-content id='meet_block' style="display: none;">
+            <a-app-title>
+                <a-heading size="l">Создание собеседования</a-heading>
+                <a-paragraph>
+                    Альфа-банк — крупнейший российский частный коммерческий банк. По данным рейтингов РБК и Forbes на конец 2010 года — седьмой в России банк по объёму активов. Главный офис расположен в Москве.
+                </a-paragraph>
+            </a-app-title>
+
+            <a-form size="m" class="example-form">
+                <a-form-field size="m">
+                    <slot name="label">
+                        <a-label size="m">Название организации:</a-label>
+                    </slot>
+                    <slot name="content">
+                        <a-input width="available" max-length="20" size="m"></a-input>
+                    </slot>
+                </a-form-field>
+
+                <a-form-field size="m">
+                    <slot name="label">
+                        <a-label size="m">Телефон:</a-label>
+                    </slot>
+                    <slot name="content">
+                        <a-phone-input placeholder="+7 000 000 00 00" size="l"></a-phone-input>
+                    </slot>
+                </a-form-field>
+
+                <a-form-field size="m">
+                    <slot name="label">
+                        <a-label size="m">Почта:</a-label>
+                    </slot>
+                    <slot name="content">
+                        <a-email-input placeholder="Электронная почта" size="l"></a-email-input>
+                    </slot>
+                </a-form-field>
+
+                <a-form-field size="m">
+                    <slot name="label">
+                        <a-label size="m">Краткое описание компании:</a-label>
+                    </slot>
+                    <slot name="content">
+                        <div>
+                            <a-textarea placeholder="Привет! Я форма для ввода вооо-ооо-оот такого текста!"></a-textarea>
+                        </div>
+                    </slot>
+                </a-form-field>
+            </a-form>
+        </a-app-content>
 
         <a-footer slot="footer "></a-footer>
     </a-page>

@@ -1,27 +1,91 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, minimum-scale=1, maximum-scale=1, initial-scale=1" />
-        <title>Alfa Blueprint</title>
-        <link rel="stylesheet" href="./blueprint/components.css" />
-        <script src="./blueprint/components.js"></script>
-        <!--
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, minimum-scale=1, maximum-scale=1, initial-scale=1" />
+    <title>Alfa Blueprint</title>
+    <link rel="stylesheet" href="./blueprint/components.css" />
+    <script src="./blueprint/components.js"></script>
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+    <!--
         <link rel="stylesheet" href="./blueprint/corporate-components.css" />
         <script src="./blueprint/corporate-components.js"></script>
         -->
-        <!--
+    <!--
         <link rel="stylesheet" href="./blueprint/retail-components.css" />
         <script src="./blueprint/retail-components.js"></script>
         -->
-    </head>
-    <body>
-        <a-page>
-            <a-header slot="header">
-                <a-user url="profile.html" text="Михаил Фридман" slot="user"></a-user>
-                <a-menu
-                    view="horizontal"
-                    content="[
+
+    <style>
+        .stylish1 {
+            padding: 12px 16px;
+            width: 300px;
+            border: 1px solid #A9A9A9;
+            border-radius: 3px;
+            float: left;
+        }
+        
+        .stylish2 {
+            padding: 12px 16px;
+            width: 300px;
+            border: 1px solid #A9A9A9;
+            border-radius: 3px;
+            display: none;
+            float: left;
+            clear: left;
+        }
+        
+        span.glyphicon {
+            font-size: 2em;
+        }
+    </style>
+
+    <script>
+        $(document).ready(function () {
+            $("#request").click(function () {
+                $("#info").toggle();
+            });
+
+
+            $("#request2").click(function () {
+                $("#info2").toggle();
+            });
+
+            $("#request3").click(function () {
+                $("#info3").toggle();
+            });
+
+            var notifyButton = document.getElementById('notify-button');
+            var notification = document.getElementById('notification');
+
+            notifyButton.addEventListener('click', function () {
+                notification.visible = true;
+            });
+
+            notification.addEventListener('closer-click', function () {
+                notification.visible = false;
+            });
+
+        });
+    </script>
+</head>
+
+<body>
+    <a-page>
+        <a-header slot="header">
+            <a-user url="profile.html" text="Михаил Фридман" slot="user"></a-user>
+            <a-menu view="horizontal" content="[
                         {
                             content: 'Главная',
                             value: 'screen1'
@@ -33,28 +97,104 @@
                         {
                             content: 'Контакты',
                             value: 'screen3'
+                        },
+                        {
+                            content: 'Оформить кредит',
+                            value: 'screen4'
                         }
-                    ]"
-                    slot="menu"
-                ></a-menu>
-            </a-header>
-            <a-app-title>
-                <a-heading size="xl">Личный кабинет</a-heading>
-            </a-app-title>
-            <a-app-content>
-                <a-paragraph>
-                    Список
-                </a-paragraph>
-                
-                <a-paragraph>
-                    <div>
-                        <a href="apply.html">
-                            <a-button size="l">Вернуться на главную страницу</a-button>
-                        </a>
-                    </div>
-                </a-paragraph>
-            </a-app-content>
-            <a-footer slot="footer"></a-footer>
-        </a-page>
-    </body>
+                    ]" slot="menu"></a-menu>
+        </a-header>
+        <a-app-title>
+            <a-heading size="xl">Личный кабинет</a-heading>
+        </a-app-title>
+
+        <a-app-title>
+            <a-heading size="l">Список заявлений:</a-heading>
+        </a-app-title>
+
+        <a-app-content style="float:left;clear:left">
+            <a-paragraph>
+                <div id="request" class="stylish1" style="">
+                    <div>Заявка № 13379009</div>
+                    <div>Статус: Оформление </div>
+                </div>
+            </a-paragraph>
+
+            <div id="info" class="stylish2" style="">
+                <div>
+                    <a-heading size="s">Выберете отделение:</a-heading>
+                </div>
+                <div>
+                    <a-select mode="radio" size="m" options="[
+        { value: 'Vkontakte', text: 'Vkontakte' },
+        { value: 'Facebook', text: 'Facebook' },
+        { value: 'Twitter', text: 'Twitter' }
+    ]"></a-select>
+                </div>
+
+                <div>
+                    <a-heading size="s">Время встречи:</a-heading>
+                </div>
+                <div>
+                    <a-select mode="radio" size="m" options="[
+        { value: 'Vkontakte', text: 'Vkontakte' },
+        { value: 'Facebook', text: 'Facebook' },
+        { value: 'Twitter', text: 'Twitter' }
+    ]"></a-select>
+                </div>
+                <br>
+                <div>
+                    <a-button id="notify-button" size="l">Большая</a-button>
+                    <a-notification id="notification" status="ok" offset="10" stick-to="right" visible="false">Заявка добавлена</a-notification>
+                </div>
+            </div>
+        </a-app-content>
+
+        <a-app-content style="float:left;clear:left">
+            <a-paragraph>
+                <div id="request2" class="stylish1" style="">
+                    <div>Заявка № 12254622</div>
+                    <div>Статус: Отменена <span class="glyphicon glyphicon-remove-circle" style="padding:8px 12px;"></span></div>
+                </div>
+            </a-paragraph>
+
+            <a-paragraph>
+                <div id="info2" class="stylish2" style="">
+                    Необходимо изменить время встречи!
+                </div>
+            </a-paragraph>
+        </a-app-content>
+
+        <a-app-content style="float:left;clear:left">
+            <a-paragraph>
+                <div id="request3" class="stylish1" style="f">
+                    <div>Заявка № 24780109</div>
+                    <div>Статус: Подтверждена <span class="glyphicon glyphicon-ok-circle" style="padding:8px 12px;"></span></div>
+                </div>
+            </a-paragraph>
+            <a-paragraph>
+                <div id="info3" class="stylish2" style="">
+                    <p>Заявка по адресу: г.Москва, ул. Большокова, д.32</p>
+                    <p>Время встречи: 13:00</p>
+                </div>
+            </a-paragraph>
+        </a-app-content>
+
+
+
+
+        <!--<a-app-content style="float:left; 
+clear: left;">
+            <a-paragraph>
+                <div>
+                    <a href="apply.html">
+                        <a-button size="l">Вернуться на главную страницу</a-button>
+                    </a>
+                </div>
+            </a-paragraph>
+        </a-app-content>-->
+        <a-footer slot="footer"></a-footer>
+    </a-page>
+</body>
+
 </html>
