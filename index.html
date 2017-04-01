@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, minimum-scale=1, maximum-scale=1, initial-scale=1" />
+        <title>Alfa Blueprint</title>
+        <link rel="stylesheet" href="./blueprint/components.css" />
+        <script src="./blueprint/components.js"></script>
+        <!--
+        <link rel="stylesheet" href="./blueprint/corporate-components.css" />
+        <script src="./blueprint/corporate-components.js"></script>
+        -->
+        <!--
+        <link rel="stylesheet" href="./blueprint/retail-components.css" />
+        <script src="./blueprint/retail-components.js"></script>
+        -->
+    </head>
+    <body>
+        <a-page>
+            <a-header slot="header">
+                <a-user url="profile.html" text="Михаил Фридман" slot="user"></a-user>
+                <a-menu
+                    view="horizontal"
+                    content="[
+                        {
+                            content: 'Главная',
+                            value: 'screen1'
+                        },
+                        {
+                            content: 'Справка',
+                            value: 'screen2'
+                        },
+                        {
+                            content: 'Контакты',
+                            value: 'screen3'
+                        }
+                    ]"
+                    slot="menu"
+                ></a-menu>
+            </a-header>
+            <a-app-title>
+                <a-heading size="xl">Кредитная карта</a-heading>
+            </a-app-title>
+            <a-app-content>
+                <a-paragraph>
+                    Альфа-банк — крупнейший российский частный коммерческий банк. По данным рейтингов РБК и Forbes на конец 2010 года — седьмой в России банк по объёму активов. Главный офис расположен в Москве.
+                    Альфа-банк — крупнейший российский частный коммерческий банк. По данным рейтингов РБК и Forbes на конец 2010 года — седьмой в России банк по объёму активов. Главный офис расположен в Москве.
+                </a-paragraph>
+                <a-paragraph>
+                    <div>
+                        <a href="apply.html">
+                            <a-button view="action" size="l">Заполнить анкету</a-button>
+                        </a>
+                    </div>
+                </a-paragraph>
+            </a-app-content>
+            <a-footer slot="footer"></a-footer>
+        </a-page>
+    </body>
+</html>
